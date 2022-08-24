@@ -1,12 +1,14 @@
 import { Profile } from "../entities/profiles";
 import User from "./models";
 
+const bcrypt = require("bcryptjs");
+
 class UserRepository {
   async register(dataProfile: Profile) {
     const profile = new User({
       name: dataProfile.name,
       email: dataProfile.email,
-      password: dataProfile.password,
+      password: bcrypt.hashSync(dataProfile.password),
     });
 
     try {
