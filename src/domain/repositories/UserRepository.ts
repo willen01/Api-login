@@ -6,7 +6,7 @@ class UserRepository {
     const profile = new User({
       name: dataProfile.name,
       email: dataProfile.email,
-      password: dataProfile.email,
+      password: dataProfile.password,
     });
 
     try {
