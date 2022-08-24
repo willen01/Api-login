@@ -5,6 +5,9 @@ const bcrypt = require("bcryptjs");
 
 class UserRepository {
   async register(dataProfile: Profile) {
+    const selectedUser = await User.findOne({ email: dataProfile.email });
+    if (selectedUser) return `user exists`;
+
     const profile = new User({
       name: dataProfile.name,
       email: dataProfile.email,
@@ -13,9 +16,9 @@ class UserRepository {
 
     try {
       await profile.save();
-      return true;
+      return `user saved`;
     } catch (error) {
-      return false;
+      return `error saving`;
     }
   }
 }
