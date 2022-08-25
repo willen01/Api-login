@@ -1,3 +1,4 @@
+import { Login } from "../entities/login";
 import { Profile } from "../entities/profiles";
 import User from "./models";
 
@@ -20,6 +21,19 @@ class UserRepository {
     } catch (error) {
       return `error saving`;
     }
+  }
+
+  async login(dataLogin: Login) {
+    const selectedUser = await User.findOne({ email: dataLogin.email });
+    if (!selectedUser) return `email incorreto`;
+
+    const passwordAndUserMatch = bcrypt.compareSync(
+      dataLogin.password,
+      selectedUser.password
+    );
+    if (!passwordAndUserMatch) return `senha incorreta`;
+
+    return `usuario logado`;
   }
 }
 
