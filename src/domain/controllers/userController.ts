@@ -9,8 +9,8 @@ class UserController {
       res.status(404).json({ msg: "email já cadastrado" });
     } else if (createProfile === "user saved") {
       res.status(201).json({ msg: "usuário cadastrado com sucesso" });
-    } else if (createProfile === "error saving") {
-      res.status(400).json({ msg: "erro ao cadastrar usuário" });
+    } else {
+      res.status(400).json({ msg: "erro ao cadastrar usuário", createProfile });
     }
   }
   async login(req: Request, res: Response) {

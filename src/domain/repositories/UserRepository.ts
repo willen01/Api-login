@@ -18,7 +18,7 @@ class UserRepository {
       await profile.save();
       return `user saved`;
     } catch (error) {
-      return `error saving`;
+      return error;
     }
   }
 
