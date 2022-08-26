@@ -1,8 +1,7 @@
 import { Login } from "../entities/login";
 import { Profile } from "../entities/profiles";
 import User from "./models";
-
-const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
 
 class UserRepository {
   async register(dataProfile: Profile) {
