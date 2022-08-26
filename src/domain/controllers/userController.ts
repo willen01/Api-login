@@ -1,9 +1,13 @@
 import { Request, Response } from "express";
 import UserRepository from "../repositories/UserRepository";
+import validate from "./validate";
 
 class UserController {
   async register(req: Request, res: Response) {
     const createProfile = await UserRepository.register(req.body);
+
+    const { error } = validate.register(req.body);
+    if (error) return res.status(400).send(error.message);
 
     if (createProfile === "user exists") {
       res.status(404).json({ msg: "email já cadastrado" });
